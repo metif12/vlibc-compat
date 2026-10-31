@@ -1,0 +1,9 @@
+# build artifacts
+build/
+*.so
+*.a
+*.o
+*.c
+/tmp/
+# keep source tests
+!tests/consumer.c
