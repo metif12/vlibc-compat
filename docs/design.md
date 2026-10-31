@@ -32,8 +32,11 @@ libc-specific symbols or layouts.
 `linux_bare/vlibc_syscall_d_vlibc.v` currently guards with `$if !i386`.
 i386 syscall table is the known gap; revive from `feat/vlibc-driver-gaps`.
 
-## Validation
+## Validation (done)
 
-Compile `lib.c` with stock `gcc` and `musl-gcc`; link a C consumer on
-each; run on Ubuntu + Alpine. Audit with `nm -D` for `GLIBC_*` symbols
-and `ldd` for `libc.so`.
+Built on Ubuntu 24.04 (glibc) and Alpine 3.21 (musl). Consumer prints
+`len=19` / `read=hello from consumer` on both. `ldd` shows no libc
+dependency; `nm -D` shows no `GLIBC_*` symbols and no undefined
+symbols (after stripping `_start` and `-fno-stack-protector`).
+
+See `scripts/test_musl.sh` for the reproducible musl check.
